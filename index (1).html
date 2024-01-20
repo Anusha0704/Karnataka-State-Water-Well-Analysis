@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<head>
+    <meta charset="UTF-8">
+    <!-- meta name="viewport" content="width=device-width, initial-scale=1.0" -->
+    <title>Loan Application Portal</title>
+    
+</head>
+<body>
+
+<div class="w3-card-4">
+  <div class="w3-container w3-brown">
+    <h2>Input Colors</h2>
+  </div>
+  <form class="w3-container" action="/result" method="POST" onsubmit="showLoading()">  <!-- Updated action attribute -->
+    <p>      
+    <label class="w3-text-brown" for="name"><b>Full Name :</b></label>
+    <input class="w3-input w3-border w3-sand" name="name" id = "name" type="text" required></p>
+    <p>      
+    <label class="w3-text-brown" for="age"><b>Age :</b></label>
+    <input class="w3-input w3-border w3-sand" name="age" type="number" id = "age" required></p>
+    <p>      
+    <label class="w3-text-brown" for="income"><b>Income :</b></label>
+    <input class="w3-input w3-border w3-sand" name="income" id = "income" type="number" required></p>
+    <p> 
+    <label class="w3-text-brown" for="loan_amount"><b>Loan Amount :</b></label>
+    <input class="w3-input w3-border w3-sand" name="loan_amount" id = "loan_amount" type="number" required></p>
+    <p>
+    <label class="w3-text-brown" for="credit_score"><b>Credit Score :</b></label>
+    <input class="w3-input w3-border w3-sand" name="credit_score" id = "credit_score" type="number" required></p>
+    <p>
+    <label class="w3-text-brown" for="months_employed"><b>Months employed :</b></label>
+    <input class="w3-input w3-border w3-sand" name="months_employed" id = "months_employed" type="number" required></p>
+    <p>
+    <label class="w3-text-brown" for="num_credit_lines"><b>Number of credit lines :</b></label>
+    <input class="w3-input w3-border w3-sand" name="num_credit_lines" id = "num_credit_lines" type="number" required></p>
+    <p>
+    <label class="w3-text-brown" for="interest_rate"><b>Interest rate :</b></label>
+    <input class="w3-input w3-border w3-sand" name="interest_rate" id = "interest_rate" type="number" required></p>
+    <p>
+    <label class="w3-text-brown" for="loan_term"><b>Loan term :</b></label>
+    <input class="w3-input w3-border w3-sand" name="loan_term" id = "loan_term" type="number" required></p>
+    <p>
+    <label class="w3-text-brown" for="dti_ratio"><b>DTI ratio :</b></label>
+    <input class="w3-input w3-border w3-sand" name="dti_ratio" id = "dti_ratio" type="number" required></p>
+    <p>
+    <label class="w3-text-brown" for="education"><b>Education :</b></label>
+    <select class="w3-select w3-border w3-sand" name="education" id = "education" required>
+    {% for status in ['High School', "Bachelor's", 'PhD', "Master's"] %}
+    <option value="{{ status }}" {% if session.get('education', '') == status %}selected{% endif %}>{{ status }}</option>
+    {% endfor %}
+    </select></p> 
+    <p>
+    <label class="w3-text-brown" for="employment_type"><b>Employment type :</b></label>
+    <select class="w3-select w3-border w3-sand" name="employment_type" id = "employment_type" required>
+    {% for status in ['Full-time', 'Self-employed', 'Unemployed', 'Part-time'] %}
+    <option value="{{ status }}" {% if session.get('employment_type', '') == status %}selected{% endif %}>{{ status }}</option>
+    {% endfor %}
+    </select></p> 
+    <p>
+    <label class="w3-text-brown" for="marital_status"><b>Marital Status :</b></label>
+    <select class="w3-select w3-border w3-sand" name="marital_status" id = "marital_status" required>
+    {% for status in ['Divorced', 'Single', 'Married'] %}
+    <option value="{{ status }}" {% if session.get('marital_status', '') == status %}selected{% endif %}>{{ status }}</option>
+    {% endfor %}
+    </select></p>    
+    <p>
+    <label class="w3-text-brown" for="has_mortgage"><b>Has Mortgage :</b></label>
+    <select class="w3-select w3-border w3-sand" name="has_mortgage" id = "has_mortgage" required>
+    <option value="Yes" {% if session.get('has_mortgage', '') == 'Yes' %}selected{% endif %}>Yes</option>
+    <option value="No" {% if session.get('has_mortgage', '') == 'No' %}selected{% endif %}>No</option>
+    </select></p>
+    <p>  
+    <label class="w3-text-brown" for="has_dependents"><b>Has Dependents :</b></label>
+    <select class="w3-select w3-border w3-sand" name="has_dependents" id = "has_dependents" required>
+    <option value="Yes" {% if session.get('has_dependents', '') == 'Yes' %}selected{% endif %}>Yes</option>
+    <option value="No" {% if session.get('has_dependents', '') == 'No' %}selected{% endif %}>No</option>
+    </select></p>
+    <p>
+    <label class="w3-text-brown" for="loan_purpose"><b>Loan Purpose :</b></label>
+    <select class="w3-select w3-border w3-sand" name="loan_purpose" id = "loan_purpose" required>
+    {% for purpose in ['Other', 'Business', 'Auto', 'Education', 'Home'] %}
+    <option value="{{ purpose }}" {% if session.get('loan_purpose', '') == purpose %}selected{% endif %}>{{ purpose }}</option>
+    {% endfor %}
+    </select></p>
+    <p>
+    <label class="w3-text-brown" for="has_cosigner"><b>Has Cosigner :</b></label>
+    <select class="w3-select w3-border w3-sand" name="has_cosigner" id = "has_cosigner" required>
+    <option value="yes" {% if session.get('has_cosigner', '') == 'yes' %}selected{% endif %}>Yes</option>
+    <option value="no" {% if session.get('has_cosigner', '') == 'no' %}selected{% endif %}>No</option>
+    </select></p>
+    <p>
+    <input type="submit" value="Submit">
+    
+    </form>
+</div>
+
+</body>
+</html>
+
